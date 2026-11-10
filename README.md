@@ -1,8 +1,29 @@
-# mini-gpt
+<div align="center">
 
-A GPT-style decoder-only transformer implemented completely from scratch in PyTorch — no Hugging Face `transformers`, no copied nanoGPT code.
+# 🧠 mini-gpt
 
-This is an educational project: every component (tokenizer, embeddings, attention, training loop, sampling, checkpointing, fine-tuning, chat...) was built incrementally, one module at a time, with the theory, math, and tensor shapes explained alongside the implementation, and a runnable demo script for each.
+**A GPT-style decoder-only transformer, built from scratch in PyTorch — one module at a time.**
+
+No Hugging Face `transformers`. No copied nanoGPT code. Every layer — tokenizer, attention, training loop, sampling, checkpointing, fine-tuning, chat — written and explained from first principles.
+
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.4+-EE4C2C?logo=pytorch&logoColor=white)
+![Tests](https://img.shields.io/badge/tests-235%20passing-brightgreen)
+![Built from scratch](https://img.shields.io/badge/built-from%20scratch-blueviolet)
+![Style: ruff](https://img.shields.io/badge/style-ruff-black)
+
+</div>
+
+---
+
+## ✨ Highlights
+
+- **30 modules, end to end** — from a character tokenizer all the way to a working chat REPL, each in its own `app/` module with a runnable `scripts/` demo.
+- **Everything from scratch** — including **AdamW** and the **cosine LR schedule**, both cross-checked against PyTorch's own implementations in tests.
+- **235 tests** — reference cross-checks (LayerNorm / GELU / AdamW / cross-entropy), end-to-end causal-masking integration tests, and the classic "overfit a tiny batch" training sanity check.
+- **Pre-LN GPT-2-style blocks** with weight tying between the embedding and output projection.
+- **Theory included** — the math and tensor-shape derivations behind each module live in [`docs/guia_mini_gpt.pdf`](docs/guia_mini_gpt.pdf).
+- **Trainable on a laptop** — a ~460K-param char-level model trains on Tiny Shakespeare in ~9 min on CPU.
 
 ## Setup
 
@@ -64,7 +85,7 @@ scripts/            # thin, runnable entrypoints — one demo per module below
 
 ## Module index
 
-Every module has: theory + math write-up (in the conversation history),
+Every module has: a theory + math write-up (see [`docs/guia_mini_gpt.pdf`](docs/guia_mini_gpt.pdf)),
 implementation under `app/`, tests under `tests/`, and a runnable demo under
 `scripts/`.
 
